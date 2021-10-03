@@ -1,2 +1,5 @@
-flask
-pandas
+pandas==1.1.0
+numpy==1.19.1
+urllib3==1.25.10
+Flask==1.1.2
+gunicorn
