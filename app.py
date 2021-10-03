@@ -8,15 +8,11 @@ from flask import Flask, send_from_directory
 
 # %%
 app = Flask(__name__, static_url_path='', static_folder='build')
-#cors = CORS(app)
-app.config['CORS_HEADERS'] = 'Content-Type'
-app.secret_key = 'aqswdefrgt'
-TEMPLATES_AUTO_RELOAD = True
-
+#cors = CORS(app)e
 area = "Rajasthan"
 
 
-@app.route('/')
+@app.route('/',defaults={'path':''})
 def index():
     return send_from_directory(app.static_folder, 'index.html')
 
