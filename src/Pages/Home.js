@@ -15,7 +15,7 @@ export default function Home({
         <button>Home</button>
         <button
           onClick={() => {
-            setDemography(false);
+            setDemography("state");
             history.push("/infographics");
           }}
         >
@@ -23,7 +23,7 @@ export default function Home({
         </button>
         <button
           onClick={() => {
-            setDemography(true);
+            setDemography("district");
             history.push("/infographics");
           }}
         >
@@ -32,12 +32,12 @@ export default function Home({
         <button>FANSA</button>
       </div>
       <div className="image-slider-area">
-        <ImageSlider />
+        <ImageSlider allTargets={allTargets} />
       </div>
       <div className="all-targets">
         <div className="all-targets-container">
           {allTargets.map((item, idx) => (
-            <Card info={item} setTarget={setTarget} target={idx} />
+            <Card info={item} setTarget={setTarget} target={idx} key={idx} />
           ))}
         </div>
       </div>

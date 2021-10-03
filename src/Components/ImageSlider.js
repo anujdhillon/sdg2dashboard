@@ -6,33 +6,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { React, useState, useEffect } from "react";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
 
-export default function ImageSlider() {
-  let slides = [
-    {
-      heading: "This is heading",
-      content: "This is content",
-      image: "../assets/waterfall.jpg",
-    },
-    {
-      heading: "This is heading",
-      content: "This is content",
-      image: "../assets/waterfall.jpg",
-    },
-    {
-      heading: "This is heading",
-      content: "This is content",
-      image: "../assets/waterfall.jpg",
-    },
-    {
-      heading: "This is heading",
-      content: "This is content",
-      image: "../assets/waterfall.jpg",
-    },
-    {
-      heading: "This is heading",
-      content: "This is content",
-      image: "../assets/waterfall.jpg",
-    },
+export default function ImageSlider({ allTargets }) {
+  let images = [
+    "../assets/waterfall.jpg",
+    "../assets/waterfall.jpg",
+    "../assets/waterfall.jpg",
+    "../assets/waterfall.jpg",
+    "../assets/waterfall.jpg",
   ];
   let colors = [
     "#c8e4b4",
@@ -48,11 +28,11 @@ export default function ImageSlider() {
   const [textOnLeft, setTextOnLeft] = useState(false);
   useEffect(() => {
     const interval = setInterval(() => {
-      setDisplayed((displayed) => (displayed + 1) % slides.length);
+      setDisplayed((displayed) => (displayed + 1) % allTargets.length);
       setTextOnLeft((textOnLeft) => !textOnLeft);
-    }, 7000);
+    }, 12000);
     return () => clearInterval(interval);
-  }, [slides.length]);
+  }, [allTargets.length]);
   let textArea = (
     <div
       style={{
@@ -61,24 +41,28 @@ export default function ImageSlider() {
       className="slider-text"
     >
       <div className="text-container">
-        <h1>{slides[displayed].heading}</h1>
-        <p>{slides[displayed].content}</p>
+        <h1>{allTargets[displayed].motto}</h1>
+        <p>
+          {allTargets[displayed].number +
+            ": " +
+            allTargets[displayed].statement}
+        </p>
       </div>
     </div>
   );
   let imageArea = (
     <div className="slider-image">
       <img
-        src={slides[displayed].image}
+        src={images[Math.floor(Math.random() * images.length)]}
         height="500px"
-        alt={slides[displayed].heading}
+        alt="SDG2"
       ></img>
     </div>
   );
   return (
     <div className="image-slider">
       <TransitionGroup>
-        <CSSTransition key={displayed} timeout={1000} classNames="messageout">
+        <CSSTransition key={displayed} timeout={200} classNames="messageout">
           <div className="content">
             {textOnLeft ? textArea : imageArea}
             {textOnLeft ? imageArea : textArea}
@@ -88,7 +72,7 @@ export default function ImageSlider() {
 
       <button
         onClick={() => {
-          setDisplayed((displayed - 1 + slides.length) % slides.length);
+          setDisplayed((displayed - 1 + allTargets.length) % allTargets.length);
 
           setTextOnLeft(!textOnLeft);
         }}
@@ -98,27 +82,28 @@ export default function ImageSlider() {
       </button>
       <button
         onClick={() => {
-          setDisplayed((displayed + 1) % slides.length);
+          setDisplayed((displayed + 1) % allTargets.length);
           setTextOnLeft(!textOnLeft);
         }}
         className="button-right"
       >
         <FontAwesomeIcon icon={faChevronRight} />
       </button>
-      <div className="dots">
-        {slides.map((item, idx) => (
-          <button
+      <div style={{ background: "none" }} className="dots">
+        {allTargets.map((item, idx) => (
+          <div
             onClick={() => {
               setDisplayed((displayed) => idx);
             }}
             style={{
               backgroundColor: `${displayed === idx ? "grey" : "white"}`,
-              border: "2px solid black",
               width: "10px",
               height: "10px",
               margin: "1px",
+              borderRadius: "5px",
             }}
-          ></button>
+            key={idx}
+          ></div>
         ))}
       </div>
     </div>

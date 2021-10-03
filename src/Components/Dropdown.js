@@ -4,7 +4,7 @@ import {
   faCheck,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { React, useState, useEffect } from "react";
+import { React, useState } from "react";
 
 export default function Dropdown({ list, label, displayed, setDisplayed }) {
   const [dropdownStatus, setDropdownStatus] = useState(false);
@@ -18,12 +18,12 @@ export default function Dropdown({ list, label, displayed, setDisplayed }) {
       </div>
       <div className="dropdown-clickable">
         <button className="dropdown-header" onClick={alterDropdownStatus}>
-          {list[displayed].label}&emsp;
+          {list[displayed].number}&emsp;
           <FontAwesomeIcon
             style={{
               color: "#666666",
               position: "absolute",
-              top: "10px",
+              top: "18px",
               right: "12px",
             }}
             className="dropdown-icon"
@@ -39,8 +39,9 @@ export default function Dropdown({ list, label, displayed, setDisplayed }) {
                 onClick={() => {
                   setDisplayed(idx);
                 }}
+                key={idx}
               >
-                {item.label}{" "}
+                {item.number}{" "}
                 {displayed === idx ? <FontAwesomeIcon icon={faCheck} /> : ""}
               </button>
             ))}
