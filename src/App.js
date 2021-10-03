@@ -11,7 +11,7 @@ export default function App() {
   const [data, setData] = useState(null);
   const fetchData = async () => {
     try {
-      let resp = await axios.get("http://10.0.2.15:5000/readData");
+      let resp = await axios.get("http://sdg2dashboard.herokuapp.com/readData");
       setData((data) => resp.data);
     } catch (e) {
       console.log(e);
