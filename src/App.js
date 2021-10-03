@@ -24,7 +24,10 @@ export default function App() {
       fetchData();
     }
   }, [data]);
-  if (data === null) return <div>Fetching...</div>;
+  if (data === null)
+    return (
+      <div>Fetching... (PS: This site is not built for mobile devices yet)</div>
+    );
   else {
     // console.log(data);
     return (
