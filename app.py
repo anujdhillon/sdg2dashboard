@@ -1,11 +1,8 @@
 # To add a new cell, type '# %%'
 # To add a new markdown cell, type '# %% [markdown]'
 # %%
-import numpy as np
 import pandas as pd
-import xlrd
 import json
-import os
 from flask import Flask, send_from_directory
 
 
