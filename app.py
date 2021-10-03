@@ -22,7 +22,6 @@ def index():
 
 
 @app.route("/readData", methods=["POST", "GET"])
-@cross_origin()
 def readData():
     data = {}
     targets = pd.read_excel("Data.xlsx", sheet_name="targetInfo")
