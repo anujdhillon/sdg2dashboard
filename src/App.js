@@ -2,6 +2,7 @@ import { React, useState, useEffect } from "react";
 import { Switch, Route } from "react-router-dom";
 import Home from "./Pages/Home";
 import Infographics from "./Pages/Infographics";
+import LoadingScreen from "react-loading-screen";
 import "./App.scss";
 import axios from "axios";
 
@@ -30,7 +31,13 @@ export default function App() {
   }, [data]);
   if (data === null)
     return (
-      <div>Fetching... (PS: This site is not built for mobile devices yet)</div>
+      <LoadingScreen
+        loading={true}
+        bgColor="#f1f1f1"
+        spinnerColor="#9ee5f8"
+        textColor="#676767"
+        text="Fetching... (PS: This site is not built for mobile devices yet)"
+      ></LoadingScreen>
     );
   else {
     // console.log(data);
