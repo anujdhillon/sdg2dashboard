@@ -1,5 +1,6 @@
 import { faHome } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useHistory } from "react-router-dom";
 import { React, useState, useEffect } from "react";
 import ReactApexChart from "react-apexcharts";
 import Dropdown from "../Components/Dropdown";
@@ -16,6 +17,7 @@ export default function Infographics({
   setData,
   fetchData,
 }) {
+  let history = useHistory();
   const [activeArea, setActiveArea] = useState(-1);
   const [options] = useState({
     annotations: {
@@ -123,11 +125,13 @@ export default function Infographics({
       <div className="infographics">
         <div className="options-area">
           <div className="home-button">
-            <a href="/">
-              <button>
-                <FontAwesomeIcon icon={faHome} size="2x" />
-              </button>
-            </a>
+            <button
+              onClick={() => {
+                history.push("/");
+              }}
+            >
+              <FontAwesomeIcon icon={faHome} size="2x" />
+            </button>
           </div>
           <div className="left">
             <div className="container">

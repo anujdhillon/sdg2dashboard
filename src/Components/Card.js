@@ -7,7 +7,7 @@ export default function Card({ info, setTarget, target }) {
   return (
     <div className="target-card">
       <h1>{info.number}</h1>
-      <h3>{info.motto}</h3>
+      <p style={{ fontSize: "20px", fontWeight: "600" }}>{info.motto}</p>
       <div className="forward-link" key={target}>
         <button
           className="info-link"

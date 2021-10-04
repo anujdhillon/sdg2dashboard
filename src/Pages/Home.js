@@ -29,10 +29,10 @@ export default function Home({
         >
           District Indicators
         </button>
-        <button>FANSA</button>
+        <button>Additional Analysis</button>
       </div>
       <div className="image-slider-area">
-        <ImageSlider allTargets={allTargets} />
+        <ImageSlider allTargets={allTargets} setTarget={setTarget} />
       </div>
       <div className="all-targets">
         <div className="all-targets-container">

@@ -4,6 +4,12 @@ import Home from "./Pages/Home";
 import Infographics from "./Pages/Infographics";
 import "./App.scss";
 import axios from "axios";
+
+const DEBUG = false;
+const url = DEBUG
+  ? "http://10.0.2.15:5000/readData"
+  : "https://sdg2dashboard.herokuapp.com/readData";
+
 export default function App() {
   const [demography, setDemography] = useState("state");
   const [indicator, setIndicator] = useState(0);
@@ -11,9 +17,7 @@ export default function App() {
   const [data, setData] = useState(null);
   const fetchData = async () => {
     try {
-      let resp = await axios.get(
-        "https://sdg2dashboard.herokuapp.com/readData"
-      );
+      let resp = await axios.get(url);
       setData((data) => resp.data);
     } catch (e) {
       console.log(e);

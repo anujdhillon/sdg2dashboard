@@ -5,8 +5,9 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { React, useState, useEffect } from "react";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
-
-export default function ImageSlider({ allTargets }) {
+import { useHistory } from "react-router-dom";
+export default function ImageSlider({ allTargets, setTarget }) {
+  let history = useHistory();
   let images = [
     "../assets/waterfall.jpg",
     "../assets/waterfall.jpg",
@@ -39,14 +40,19 @@ export default function ImageSlider({ allTargets }) {
         backgroundColor: colors[Math.floor(Math.random() * colors.length)],
       }}
       className="slider-text"
+      onClick={() => {
+        setTarget(displayed);
+        history.push("/infographics");
+      }}
     >
       <div className="text-container">
         <h1>{allTargets[displayed].motto}</h1>
-        <p>
-          {allTargets[displayed].number +
-            ": " +
-            allTargets[displayed].statement}
-        </p>
+        <span>
+          <span style={{ fontSize: "20px", fontWeight: "700" }}>
+            {allTargets[displayed].number}
+          </span>
+          {": " + allTargets[displayed].statement}
+        </span>
       </div>
     </div>
   );
