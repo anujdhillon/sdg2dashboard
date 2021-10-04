@@ -36,7 +36,7 @@ export default function App() {
         bgColor="#f1f1f1"
         spinnerColor="#9ee5f8"
         textColor="#676767"
-        text="Fetching... (PS: This site is not built for mobile devices yet)"
+        text="Fetching... (PS: Switch to laptop, in case you are using a mobile)"
       ></LoadingScreen>
     );
   else {
