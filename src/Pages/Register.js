@@ -1,6 +1,7 @@
 import { React, useEffect, useState } from "react";
 import httpClient from "../Util/httpClient";
 import Dropdown from "../Components/Dropdown";
+import { BASE_URL } from "../Util/base";
 export default function Register({ states }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -12,7 +13,7 @@ export default function Register({ states }) {
   const [groups, setGroups] = useState(null);
   const [group, setGroup] = useState(0);
   const fetchDistricts = async (id) => {
-    const resp = await httpClient.get("//127.0.0.1:5000/districts/" + id);
+    const resp = await httpClient.get(BASE_URL + "districts/" + id);
     console.log(resp);
     setDistricts(resp.data);
   };

@@ -1,6 +1,8 @@
 import React from "react";
 import { useHistory } from "react-router-dom";
 import httpClient from "../Util/httpClient";
+
+import { BASE_URL } from "../Util/base";
 export default function Navbar({ user }) {
   let history = useHistory();
   return (
@@ -44,7 +46,7 @@ export default function Navbar({ user }) {
         {user !== null && (
           <button
             onClick={async () => {
-              const resp = await httpClient.post("//127.0.0.1:5000/logout");
+              const resp = await httpClient.post(BASE_URL + "logout");
               window.location.reload();
             }}
           >

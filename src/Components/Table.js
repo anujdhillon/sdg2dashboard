@@ -1,6 +1,8 @@
 import { React, useState, useEffect } from "react";
 import { DataGrid } from "@mui/x-data-grid";
 import httpClient from "../Util/httpClient";
+
+import { BASE_URL } from "../Util/base";
 export default function Table({ activeArea }) {
   const columns = [
     { field: "id", headerName: "ID", width: 70 },
@@ -10,7 +12,7 @@ export default function Table({ activeArea }) {
   const fetchAreaDetails = async (id) => {
     try {
       if (id == -1) id = 0;
-      const resp = await httpClient.get("//127.0.0.1:5000/users/" + id);
+      const resp = await httpClient.get(BASE_URL + "users/" + id);
       console.log(resp);
       setRows(resp.data);
     } catch (e) {

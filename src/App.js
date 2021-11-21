@@ -11,11 +11,7 @@ import colors from "./Components/colors";
 import "./App.scss";
 import httpClient from "./Util/httpClient";
 import NewRecord from "./Pages/NewRecord";
-
-const DEBUG = true;
-const BASE_URL = DEBUG
-  ? "//127.0.0.1:5000/"
-  : "https://sdg2dashboard.herokuapp.com/";
+import { BASE_URL } from "./Util/base";
 
 export default function App() {
   const [demography, setDemography] = useState("state");
@@ -26,7 +22,7 @@ export default function App() {
   const [states, setStates] = useState(null);
 
   const fetchStates = async () => {
-    const resp = await httpClient.get("//127.0.0.1:5000/states");
+    const resp = await httpClient.get(BASE_URL + "states");
     console.log(resp);
     setStates(resp.data);
   };
@@ -42,7 +38,7 @@ export default function App() {
   };
   const fetchUser = async () => {
     try {
-      let resp = await httpClient.get("//127.0.0.1:5000/@me");
+      let resp = await httpClient.get(BASE_URL + "@me");
       setUser(resp.data);
     } catch (e) {
       console.log(e);

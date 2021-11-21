@@ -10,6 +10,8 @@ import TimeSeries from "../Components/TimeSeries";
 import PieChart from "../Components/PieChart";
 import httpClient from "../Util/httpClient";
 import { flexbox } from "@mui/system";
+
+import { BASE_URL } from "../Util/base";
 export default function Infographics({
   demography,
   setDemography,
@@ -31,7 +33,7 @@ export default function Infographics({
 
   const fetchAreaDetails = async (id) => {
     try {
-      const resp = await httpClient.get("//127.0.0.1:5000/district/" + id);
+      const resp = await httpClient.get(BASE_URL + "district/" + id);
       setArea(resp.data);
     } catch (e) {
       console.log(e);
@@ -40,7 +42,7 @@ export default function Infographics({
 
   const fetchData = async (id) => {
     try {
-      const resp = await httpClient.get("//127.0.0.1:5000/records/" + id);
+      const resp = await httpClient.get(BASE_URL + "records/" + id);
       //console.log(resp.data);
       setData(resp.data);
     } catch (e) {

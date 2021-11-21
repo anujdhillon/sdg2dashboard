@@ -1,12 +1,13 @@
 import { React, useState } from "react";
 import httpClient from "../Util/httpClient";
 import { useHistory } from "react-router-dom";
+import { BASE_URL } from "../Util/base";
 export default function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   let history = useHistory();
   const logInUser = async () => {
-    const resp = await httpClient.post("//127.0.0.1:5000/login", {
+    const resp = await httpClient.post(BASE_URL + "login", {
       email: email,
       password: password,
     });
