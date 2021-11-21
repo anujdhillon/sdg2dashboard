@@ -16,7 +16,7 @@ import { BASE_URL } from "./Util/base";
 export default function App() {
   const [demography, setDemography] = useState("state");
   const [subTarget, setSubTarget] = useState(0);
-  const [target, setTarget] = useState(0);
+  const [target, setTarget] = useState(3);
   const [allTargets, setAllTargets] = useState(null);
   const [user, setUser] = useState(null);
   const [states, setStates] = useState(null);

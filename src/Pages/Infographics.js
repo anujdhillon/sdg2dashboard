@@ -27,7 +27,7 @@ export default function Infographics({
   const [activeArea, setActiveArea] = useState(-1);
   const [data, setData] = useState(null);
   const [date, setDate] = useState(today);
-  const [group, setGroup] = useState(0);
+  const [group, setGroup] = useState(4);
   const [groups, setGroups] = useState(null);
   const [area, setArea] = useState(null);
 
