@@ -1,29 +1,47 @@
 @import url("https://fonts.googleapis.com/css2?family=Noto+Serif:ital@1&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,500;1,400&family=Sora:wght@200;300;500&display=swap");
 body {
-  font-family: "Noto Serif", serif;
+  font-family: "JetBrains Mono", monospace;
+  font-family: "Sora", sans-serif;
+}
+
+.nav-button {
+  outline: none;
+  border: none;
+  height: 50px;
+  color: #067dfc;
+  font-size: 17px;
+  cursor: pointer;
+  padding: 10px;
+  margin: 10px;
+  background-color: #e0ecfc;
+  border-radius: 10px;
+  &:hover {
+    background-color: #c8dcfc;
+  }
 }
 
 .App {
   overflow-x: hidden;
   .navbar {
     display: flex;
-    width: 100%;
-    justify-content: space-around;
+    background-color: #f6f6f7;
+    justify-content: space-between;
+    padding: 10px 100px 10px 100px;
+    z-index: 200;
     button {
-      width: 100%;
       outline: none;
       border: none;
       height: 50px;
-      background-color: #101c3c;
-      color: white;
+      color: #067dfc;
       font-size: 17px;
       cursor: pointer;
+      padding: 10px;
+      margin: 10px;
+      background-color: #e0ecfc;
+      border-radius: 10px;
       &:hover {
-        background-color: rgb(17, 120, 204);
-      }
-      &:first-child {
-        background-color: steelblue;
-        cursor: initial;
+        background-color: #c8dcfc;
       }
     }
   }
@@ -51,10 +69,29 @@ body {
         display: flex;
         height: 720px;
         margin: 50px;
-        .table-container {
-          width: 100%;
+        margin-bottom: 100px;
+        .details-area {
           margin-left: 50px;
-          transition: all 0.4s ease-in-out;
+          .table-container {
+            width: 100%;
+            transition: all 0.4s ease-in-out;
+            text-align: center;
+            height: 100%;
+          }
+          width: 50%;
+          .main-details {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+          }
+        }
+      }
+      .bottom {
+        display: flex;
+        justify-content: space-between;
+        margin: 50px;
+        div {
+          width: 100%;
           text-align: center;
         }
       }
@@ -84,7 +121,7 @@ body {
               justify-content: space-around;
               align-items: center;
               text-align: center;
-              opacity: 0.9;
+              opacity: 1;
               height: 100%;
               .text-container {
                 width: 80%;
@@ -112,15 +149,15 @@ body {
           grid-template-columns: repeat(3, 1fr);
           .target-card {
             margin: 20px;
-            background-color: #ffe49c;
             position: relative;
-            height: 150px;
+            border-radius: 50px;
+            padding: 10px;
             .info-link {
               cursor: pointer;
               position: absolute;
               border: none;
               outline: none;
-              background-color: #06a3da;
+              background-color: #f6f6f7;
               bottom: -20%;
               left: calc(50% - 35px);
               opacity: 0;
@@ -128,7 +165,7 @@ body {
               height: 40px;
               transition: all 0.4s ease-in-out;
               .arrow {
-                color: white;
+                color: #6d757d;
                 transition: all 0.2s ease-in-out;
               }
               &:hover {
@@ -151,10 +188,10 @@ body {
   }
   .footer {
     width: 100%;
-    background-color: #091e3e;
+    background-color: #f6f6f7;
     .container {
       padding: 40px 80px 40px 80px;
-      color: white;
+      color: #6d757d;
       display: flex;
       align-items: center;
       text-align: center;
@@ -197,6 +234,7 @@ body {
       z-index: 100;
       overflow-y: scroll;
       overflow-x: hidden;
+      max-height: 200px;
     }
     .dd-list::-webkit-scrollbar {
       width: 0;
@@ -239,6 +277,29 @@ body {
   cursor: initial;
 }
 
+.login-page {
+  display: flex;
+  justify-content: space-around;
+  margin: 30px;
+  .container {
+    padding: 50px;
+    background: #ffffff;
+    box-shadow: 0px 5px 20px rgba(192, 223, 254, 0.7);
+    border-radius: 20px;
+    form {
+      text-align: left;
+      div {
+        margin-top: 15px;
+      }
+      .submit-button-container {
+        margin-top: 40px;
+        display: flex;
+        justify-content: space-around;
+      }
+    }
+  }
+}
+
 .home-button {
   button {
     width: 60px;
@@ -277,6 +338,23 @@ body {
     opacity: 1;
   }
 }
+
+.my-button {
+  background: #ffffff;
+  box-shadow: 0px 5px 20px rgba(192, 223, 254, 0.7);
+  border-radius: 10px;
+  outline: none;
+  border: none;
+  color: #858585;
+  padding-left: 10px;
+  padding-right: 35px;
+}
+.text-box {
+  height: 30px;
+  font-size: 18px;
+  width: 90%;
+}
+
 .button-left {
   left: 10px;
 }

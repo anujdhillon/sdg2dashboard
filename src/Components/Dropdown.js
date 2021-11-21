@@ -17,8 +17,12 @@ export default function Dropdown({ list, label, displayed, setDisplayed }) {
         <span>{label}:&emsp;</span>
       </div>
       <div className="dropdown-clickable">
-        <button className="dropdown-header" onClick={alterDropdownStatus}>
-          {list[displayed].number}&emsp;
+        <button
+          type="button"
+          className="dropdown-header"
+          onClick={alterDropdownStatus}
+        >
+          {list[displayed]}&emsp;
           <FontAwesomeIcon
             style={{
               color: "#666666",
@@ -41,7 +45,7 @@ export default function Dropdown({ list, label, displayed, setDisplayed }) {
                 }}
                 key={idx}
               >
-                {item.number}{" "}
+                {item}{" "}
                 {displayed === idx ? <FontAwesomeIcon icon={faCheck} /> : ""}
               </button>
             ))}

@@ -6,25 +6,8 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { React, useState, useEffect } from "react";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
 import { useHistory } from "react-router-dom";
-export default function ImageSlider({ allTargets, setTarget }) {
+export default function ImageSlider({ allTargets, setTarget, colors }) {
   let history = useHistory();
-  let images = [
-    "../assets/waterfall.jpg",
-    "../assets/waterfall.jpg",
-    "../assets/waterfall.jpg",
-    "../assets/waterfall.jpg",
-    "../assets/waterfall.jpg",
-  ];
-  let colors = [
-    "#c8e4b4",
-    "#99ffcc",
-    "#ffcccc",
-    "#ffe4cc",
-    "#e8e4e4",
-    "#d0e4fc",
-    "#fffccc",
-    "#e8ccfc",
-  ];
   const [displayed, setDisplayed] = useState(0);
   const [textOnLeft, setTextOnLeft] = useState(false);
   useEffect(() => {
@@ -37,7 +20,8 @@ export default function ImageSlider({ allTargets, setTarget }) {
   let textArea = (
     <div
       style={{
-        backgroundColor: colors[Math.floor(Math.random() * colors.length)],
+        backgroundColor: colors[displayed % colors.length].bg,
+        color: colors[displayed % colors.length].fg,
       }}
       className="slider-text"
       onClick={() => {
@@ -46,23 +30,14 @@ export default function ImageSlider({ allTargets, setTarget }) {
       }}
     >
       <div className="text-container">
-        <h1>{allTargets[displayed].motto}</h1>
-        <span>
-          <span style={{ fontSize: "20px", fontWeight: "700" }}>
-            {allTargets[displayed].number}
-          </span>
-          {": " + allTargets[displayed].statement}
-        </span>
+        <h1>{allTargets[displayed].name}</h1>
+        <span>{allTargets[displayed].fullDescription}</span>
       </div>
     </div>
   );
   let imageArea = (
     <div className="slider-image">
-      <img
-        src={images[Math.floor(Math.random() * images.length)]}
-        height="500px"
-        alt="SDG2"
-      ></img>
+      <img src={allTargets[displayed].img} height="500px" alt="SDG2"></img>
     </div>
   );
   return (

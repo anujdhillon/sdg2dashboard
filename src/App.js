@@ -2,64 +2,97 @@ import { React, useState, useEffect } from "react";
 import { Switch, Route } from "react-router-dom";
 import Home from "./Pages/Home";
 import Infographics from "./Pages/Infographics";
+import NotFound from "./Pages/NotFound";
+import Login from "./Pages/Login";
+import Register from "./Pages/Register";
+import Navbar from "./Components/Navbar";
 import LoadingScreen from "react-loading-screen";
+import colors from "./Components/colors";
 import "./App.scss";
-import axios from "axios";
+import httpClient from "./Util/httpClient";
+import NewRecord from "./Pages/NewRecord";
 
-const DEBUG = false;
-const url = DEBUG
-  ? "http://10.0.2.15:5000/readData"
-  : "https://sdg2dashboard.herokuapp.com/readData";
+const DEBUG = true;
+const BASE_URL = DEBUG
+  ? "//127.0.0.1:5000/"
+  : "https://sdg2dashboard.herokuapp.com/";
 
 export default function App() {
   const [demography, setDemography] = useState("state");
-  const [indicator, setIndicator] = useState(0);
+  const [subTarget, setSubTarget] = useState(0);
   const [target, setTarget] = useState(0);
-  const [data, setData] = useState(null);
-  const fetchData = async () => {
+  const [allTargets, setAllTargets] = useState(null);
+  const [user, setUser] = useState(null);
+  const [states, setStates] = useState(null);
+
+  const fetchStates = async () => {
+    const resp = await httpClient.get("//127.0.0.1:5000/states");
+    console.log(resp);
+    setStates(resp.data);
+  };
+
+  const fetchTargets = async () => {
     try {
-      let resp = await axios.get(url);
-      setData((data) => resp.data);
+      let resp = await httpClient.get(BASE_URL + "/targets");
+      console.log(resp);
+      setAllTargets(resp.data);
     } catch (e) {
       console.log(e);
     }
   };
-  useEffect(() => {
-    if (data === null) {
-      fetchData();
+  const fetchUser = async () => {
+    try {
+      let resp = await httpClient.get("//127.0.0.1:5000/@me");
+      setUser(resp.data);
+    } catch (e) {
+      console.log(e);
     }
-  }, [data]);
-  if (data === null)
-    return (
-      <LoadingScreen
-        loading={true}
-        bgColor="#f1f1f1"
-        spinnerColor="#9ee5f8"
-        textColor="#676767"
-        text="Fetching... (PS: Switch to laptop, in case you are using a mobile)"
-      ></LoadingScreen>
-    );
-  else {
-    // console.log(data);
+  };
+
+  useEffect(() => {
+    if (states === null) fetchStates();
+  }, [states]);
+
+  useEffect(() => {
+    if (allTargets === null) fetchTargets();
+  }, [allTargets]);
+
+  useEffect(() => {
+    fetchUser();
+  }, []);
+
+  // console.log(data);
+  if (allTargets === null) return <div>Fetching...</div>;
+  else
     return (
       <div className="App">
         <div className="header">
-          <div className="container">
-            <img src="/assets/dpdeslogo.png" alt="DPDES Logo"></img>
-            <img src="/assets/sdg2logo.png" alt="SDG2 Logo"></img>
-          </div>
+          <Navbar user={user} />
         </div>
         <div className="body">
           <Switch>
+            <Route exact path="/login" render={(props) => <Login />} />
+            <Route
+              exact
+              path="/new"
+              render={(props) => <NewRecord targets={allTargets} user={user} />}
+            />
+            <Route
+              exact
+              path="/register"
+              render={(props) => <Register states={states} />}
+            />
             <Route
               exact
               path="/"
               render={(props) => (
                 <Home
-                  allTargets={data.targets}
+                  allTargets={allTargets}
                   setTarget={setTarget}
                   demography={demography}
                   setDemography={setDemography}
+                  colors={colors}
+                  user={user}
                 />
               )}
             />
@@ -71,14 +104,14 @@ export default function App() {
                   setDemography={setDemography}
                   target={target}
                   setTarget={setTarget}
-                  indicator={indicator}
-                  setIndicator={setIndicator}
-                  data={data}
-                  setData={setData}
-                  fetchData={fetchData}
+                  subTarget={subTarget}
+                  setSubTarget={setSubTarget}
+                  allTargets={allTargets}
+                  states={states}
                 />
               )}
             />
+            <Route component={NotFound} />
           </Switch>
         </div>
         <div className="footer">
@@ -86,24 +119,19 @@ export default function App() {
             <div>
               <h1>Quick Links</h1>
               <ul>
-                <li>Niti Aayog</li>
-                <li>MoSPI, GoI</li>
-                <li>Department of Planning, GoR</li>
+                <li>Github</li>
+                <li>Some link</li>
+                <li>Another link</li>
               </ul>
             </div>
-            <div style={{ textAlign: "center" }}>
-              <img src="assets/wfplogo.png" alt="WFP Logo"></img>
-            </div>
             <div>
-              <h1>Developed in collaboration with:</h1>
+              <h1>Developed by:</h1>
               <p>
-                Public systems Lab, Indian Institute of Technology, Delhi <br />
-                Contact: 011-26596317
+                Indian Institute of Technology, Delhi <br />
               </p>
             </div>
           </div>
         </div>
       </div>
     );
-  }
 }
