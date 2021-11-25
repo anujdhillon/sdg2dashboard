@@ -18,7 +18,7 @@ export default function Register({ states }) {
     setDistricts(resp.data);
   };
   const fetchGroups = async (id) => {
-    const resp = await httpClient.get("//127.0.0.1:5000/groups");
+    const resp = await httpClient.get(BASE_URL + "groups");
     console.log(resp);
     setGroups(resp.data);
   };
@@ -32,7 +32,7 @@ export default function Register({ states }) {
   }, [groups]);
 
   const registerUser = async () => {
-    const resp = await httpClient.post("//127.0.0.1:5000/register", {
+    const resp = await httpClient.post(BASE_URL + "register", {
       email: email,
       password: password,
       name: name,
@@ -42,6 +42,7 @@ export default function Register({ states }) {
     });
     console.log(states);
     console.log(resp);
+    if (resp.status === 200) window.location.href = "/";
   };
 
   return (
